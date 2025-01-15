@@ -1,5 +1,7 @@
 package Entities;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class Medikamente {
 
     int id;
@@ -7,8 +9,10 @@ public class Medikamente {
     int price;
     String Krankheit;
 
-    public Medikamente(int id, String name, int price, String krankheit) {
-        this.id = id;
+    private final AtomicInteger idgenerator = new AtomicInteger(0);
+
+    public Medikamente(String name, int price, String krankheit) {
+        this.id = idgenerator.incrementAndGet();
         this.name = name;
         this.price = price;
         Krankheit = krankheit;
@@ -44,5 +48,16 @@ public class Medikamente {
 
     public void setKrankheit(String krankheit) {
         Krankheit = krankheit;
+    }
+
+    @Override
+    public String toString() {
+        return "Medikamente{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", Krankheit='" + Krankheit + '\'' +
+                ", idgenerator=" + idgenerator +
+                '}';
     }
 }
